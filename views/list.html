@@ -1,0 +1,12 @@
+<html>
+  <head>
+    <title>Welcome to my personal Pokedex!</title>
+  </head>
+  <body>
+   <h1>Pokemons:</h1>
+    {% for pokemon in pokemons %}
+    <a href="/pokemons/{{ pokemon.name }}/">{{ pokemon.name }}</a></br>
+    {% endfor %}
+  </body>
+
+</html>
