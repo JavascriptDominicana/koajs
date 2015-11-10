@@ -44,16 +44,21 @@ var pokemons = {
 
   add: function *(){
 
+      console.log(this.method);
     if(this.method === 'GET'){
+
       yield this.render('new');
-    }
+
+    }else{
 
       var post = yield parse(this);
       yield pokedex.insert(post);
       this.redirect('/pokemons/'+ post.name +'/' );
       yield this.render('show', {'pokemon': post});
 
-    },
+    }
+
+  },
 
 };
 

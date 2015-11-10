@@ -1,14 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Agrega tu pokemon{% endblock %}
 
-<html>
-  <meta charset="utf-8">
-  <head>
-    <title>Agrega tu pokemon</title>
-  </head>
-  <body>
+{% block content %}
     <h1>Tenemos que atraparlos a todos, agregalo</h1>
 
   <p>Reporta un nuevo pokemon.</p>
-  <form action="." method="post">
+  <form action="." method="post" class="uk-form">
     <p><input type="text" placeholder="name" name="name" required></p>
     <p><input type="text" placeholder="numero de identificacion" name="id" required></p>
     <p><input type="text" placeholder="URL Fotografía de prueba" name="image" required></p>
@@ -28,9 +25,6 @@
         </select>
     </p>
 
-    <p><input type="submit" value="Crea el nuevo pokemon"></p>
+    <p><input class="uk-button uk-button-primary" type="submit" value="Crea el nuevo pokemon"></p>
   </form>
-    <p></p>
-  </body>
-
-</html>
+{% endblock %}

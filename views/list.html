@@ -1,12 +1,12 @@
-<html>
-  <head>
-    <title>Welcome to my personal Pokedex!</title>
-  </head>
-  <body>
-   <h1>Pokemons:</h1>
-    {% for pokemon in pokemons %}
-    <a href="/pokemons/{{ pokemon.name }}/">{{ pokemon.name }}</a></br>
-    {% endfor %}
-  </body>
+{% extends 'base.html' %}
 
-</html>
+   {% block title %}Welcome to my personal Pokedex!{% endblock %}
+
+   {% block content %}
+   <h1>Pokemons:</h1>
+
+    {% for pokemon in pokemons %}
+    <p><a href="/pokemons/{{ pokemon.name }}/">{{ pokemon.name | capitalize }}</a></p></br>
+    {% endfor %}
+
+   {% endblock %}

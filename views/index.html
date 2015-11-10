@@ -1,11 +1,8 @@
-<html>
-  <head>
-    <title>Welcome to my personal Pokedex!</title>
-  </head>
-  <body>
-   <p> Welcome to my personal Pokedex!</p>
+{% extends 'base.html' %}
+{% block title %}Welcome to my personal Pokedex!{% endblock %}
+
+{% block content %}
+   <h1> Welcome to my personal Pokedex!</h1>
 
    <a href="/pokemons/">Click here to see it</a>
-  </body>
-
-</html>
+{% endblock %}
