@@ -1,12 +1,18 @@
 <html>
+  <meta charset="utf-8">
   <head>
-    <title>{{ pokemon.name }}</title>
+    <title>{% if pokemon %}{{ pokemon.name }}{% else %} Pokemon not found {% endif %}</title>
   </head>
   <body>
+    {% if pokemon %}
     <h1>{{ pokemon.name }}</h1>
     <p>Id: {{ pokemon.id }}</p>
     <p>type: {{ pokemon.type }}</p>
     <img src="{{ pokemon.image }}">
+    <p> Tienes algun otro pokemon no registrado? <a href="/new/">Agregalo a la lista</a></p>
+    {% else %}
+    <p>El pokemon que buscas no esta en el pokedex. <a href="/new/">Agregalo a la lista</a></p>
+    {% endif %}
   </body>
 
 </html>

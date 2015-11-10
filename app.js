@@ -3,9 +3,9 @@ const Koa = require('koa');
 const app = new Koa();
 const route = require('koa-route');
 const views = require('koa-views');
-//const mongo = require('koa-mongo');
 const monk = require('monk');
 const wrap = require('co-monk');
+const parse = require('co-body');
 
 var db = monk('localhost/pokedex');
 var pokedex = wrap(db.get('pokemons'));
@@ -13,7 +13,7 @@ var pokedex = wrap(db.get('pokemons'));
 app.use(views('views', {
 
   map: {
-    html: 'liquid'
+    html: 'swig'
   }
 
 }));
@@ -21,30 +21,47 @@ app.use(views('views', {
 var pokemons = {
 
   index: function*(){
+
     yield this.render('index');
+
   },
 
   list: function *(){
-    var pokemons = yield pokedex.find({});// db;  //this.mongo.collection('pokemons').find();
-    console.log(pokemons);
+
+    var pokemons = yield pokedex.find({});
+
     yield this.render('list', {'pokemons': pokemons });
+
   },
 
   show: function *(name){
+
     var pokemon = yield pokedex.findOne({name: name});
 
-    if(pokemon){
-      yield this.render('show', {'pokemon': pokemon});
-    }else{
-      return this.throw('cannot find that pokemon', 404);
-    }
+    yield this.render('show', {'pokemon': pokemon});
+
   },
+
+  add: function *(){
+
+    if(this.method === 'GET'){
+      yield this.render('new');
+    }
+
+      var post = yield parse(this);
+      yield pokedex.insert(post);
+      this.redirect('/pokemons/'+ post.name +'/' );
+      yield this.render('show', {'pokemon': post});
+
+    },
 
 };
 
 app.use(route.get('/', pokemons.index));
 app.use(route.get('/pokemons', pokemons.list));
 app.use(route.get('/pokemons/:name', pokemons.show));
+app.use(route.get('/new/', pokemons.add));
+app.use(route.post('/new/', pokemons.add));
 
 
 app.listen(3000);
