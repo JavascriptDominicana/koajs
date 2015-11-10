@@ -3,12 +3,17 @@
   {% block title %}{% if pokemon %}{{ pokemon.name }}{% else %} Pokemon not found {% endif %}{% endblock %}
 
   {% block content %}
+
+  <ul class="uk-breadcrumb">
+    <li class="uk-active"><a href="/pokemons/">Volver a la lista</a></li>
+  </ul>
+
     {% if pokemon %}
     <h1>{{ pokemon.name| capitalize }}</h1>
     <p>Id: {{ pokemon.id }}</p>
     <p>type: {{ pokemon.type }}</p>
     <img src="{{ pokemon.image }}">
-    <p> Tienes algun otro pokemon no registrado? <a href="/new/">Agregalo a la lista</a></p>
+    <p>Tienes algun otro pokemon no registrado? <a href="/new/">Agregalo a la lista</a></p>
     {% else %}
     <p>El pokemon que buscas no esta en el pokedex. <a href="/new/">Agregalo a la lista</a></p>
     {% endif %}
