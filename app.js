@@ -1,4 +1,3 @@
-
 const Koa = require('koa');
 const app = new Koa();
 const route = require('koa-route');
@@ -44,7 +43,6 @@ var pokemons = {
 
   add: function *(){
 
-      console.log(this.method);
     if(this.method === 'GET'){
 
       yield this.render('new');
